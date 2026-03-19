@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tetris</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="layout">
+    <section class="panel hero">
+      <p class="eyebrow">Browser Arcade</p>
+      <h1>TETRIS</h1>
+      <p class="lede">
+        PC はキーボード、スマホは画面下ボタンと盤面スワイプで操作できます。
+      </p>
+      <div class="controls">
+        <div><span>← →</span><span>移動</span></div>
+        <div><span>↓</span><span>高速落下</span></div>
+        <div><span>Z / X</span><span>回転</span></div>
+        <div><span>Space</span><span>一気に落下</span></div>
+        <div><span>Swipe</span><span>スマホで左右移動 / 落下</span></div>
+      </div>
+    </section>
+
+    <section class="board-shell">
+      <canvas id="game" width="300" height="600" aria-label="テトリスのゲーム盤面"></canvas>
+      <div class="overlay hidden" id="overlay">
+        <p class="overlay-label" id="overlayLabel">GAME OVER</p>
+        <button id="restartButton">もう一度遊ぶ</button>
+      </div>
+    </section>
+
+    <aside class="panel sidebar">
+      <div class="stat-card">
+        <span>Score</span>
+        <strong id="score">0</strong>
+      </div>
+      <div class="stat-card">
+        <span>Lines</span>
+        <strong id="lines">0</strong>
+      </div>
+      <div class="stat-card">
+        <span>Level</span>
+        <strong id="level">1</strong>
+      </div>
+      <div class="next-card">
+        <p>Next</p>
+        <canvas id="next" width="120" height="120" aria-label="次のピース"></canvas>
+      </div>
+      <button class="primary" id="startButton">スタート / リスタート</button>
+    </aside>
+  </main>
+
+  <section class="touch-controls" aria-label="スマホ操作">
+    <button class="touch-button" data-action="rotate-left" aria-label="左回転">↺</button>
+    <button class="touch-button" data-action="left" aria-label="左へ移動">←</button>
+    <button class="touch-button touch-button-drop" data-action="down" aria-label="下へ移動">↓</button>
+    <button class="touch-button" data-action="right" aria-label="右へ移動">→</button>
+    <button class="touch-button" data-action="rotate-right" aria-label="右回転">↻</button>
+    <button class="touch-button touch-button-wide" data-action="hard-drop" aria-label="一気に落下">DROP</button>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
