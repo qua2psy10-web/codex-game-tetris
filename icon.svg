@@ -1,0 +1,16 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="112" fill="#09111F"/>
+  <rect width="512" height="512" rx="112" fill="url(#paint0_radial)" fill-opacity="0.35"/>
+  <path d="M126 114H386V158H126V114ZM170 192H258V236H170V192ZM258 192H346V236H258V192ZM214 236H302V280H214V236ZM214 280H302V324H214V280ZM170 324H258V368H170V324ZM258 324H346V368H258V324ZM126 368H214V412H126V368ZM214 368H302V412H214V368ZM302 368H390V412H302V368Z" fill="#6AE2FF"/>
+  <path d="M170 192H258V236H170V192Z" fill="#FFB84D"/>
+  <path d="M214 236H302V280H214V236Z" fill="#FF6B7A"/>
+  <path d="M258 324H346V368H258V324Z" fill="#63F07D"/>
+  <path d="M126 368H214V412H126V368Z" fill="#CF7BFF"/>
+  <text x="256" y="96" text-anchor="middle" fill="#EBF7FF" font-size="44" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" letter-spacing="10">TETRIS</text>
+  <defs>
+    <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(114 92) rotate(48.1798) scale(465.714)">
+      <stop stop-color="#6AE2FF"/>
+      <stop offset="1" stop-color="#09111F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

@@ -54,6 +54,14 @@ const overlay = document.getElementById("overlay");
 const overlayLabel = document.getElementById("overlayLabel");
 const touchButtons = document.querySelectorAll("[data-action]");
 
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(() => {
+      // Service worker registration failure should not block the game.
+    });
+  });
+}
+
 let board;
 let piece;
 let nextPiece;
