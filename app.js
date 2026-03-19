@@ -56,7 +56,7 @@ const touchButtons = document.querySelectorAll("[data-action]");
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(() => {
+    navigator.serviceWorker.register("./sw.js", { scope: "./" }).catch(() => {
       // Service worker registration failure should not block the game.
     });
   });
