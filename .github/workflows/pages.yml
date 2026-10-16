@@ -1,0 +1,33 @@
+name: Publish Tetris
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare Tetris files
+        run: |
+          mkdir _site
+          cp index.html app.js style.css sw.js manifest.json icon.svg icon-192.png icon-512.png apple-touch-icon.png _site/
+          touch _site/.nojekyll
+          test -z "$(find _site -iname '*tennis*')"
+          grep -q '<title>Tetris</title>' _site/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy Tetris
+        id: deployment
+        uses: actions/deploy-pages@v4
