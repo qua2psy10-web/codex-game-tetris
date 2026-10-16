@@ -75,6 +75,7 @@ let animationId;
 let touchStartX = 0;
 let touchStartY = 0;
 let touchLastX = 0;
+let touchMoved = false;
 
 function createBoard() {
   return Array.from({ length: ROWS }, () => Array(COLS).fill(null));
@@ -106,7 +107,7 @@ function resetGame() {
   lines = 0;
   level = 1;
   dropCounter = 0;
-  lastTime = 0;
+  lastTime = performance.now();
   gameOver = false;
   overlay.classList.add("hidden");
   updateStats();
@@ -363,6 +364,9 @@ function performAction(action) {
 }
 
 document.addEventListener("keydown", (event) => {
+  if (["ArrowLeft", "ArrowRight", "ArrowDown", "ArrowUp", "Space"].includes(event.code)) {
+    event.preventDefault();
+  }
   switch (event.code) {
     case "ArrowLeft":
       performAction("left");
@@ -401,6 +405,7 @@ canvas.addEventListener("touchstart", (event) => {
   touchStartX = touch.clientX;
   touchStartY = touch.clientY;
   touchLastX = touch.clientX;
+  touchMoved = false;
 }, { passive: true });
 
 canvas.addEventListener("touchmove", (event) => {
@@ -411,6 +416,7 @@ canvas.addEventListener("touchmove", (event) => {
   const touch = event.touches[0];
   const diffX = touch.clientX - touchLastX;
   const totalY = touch.clientY - touchStartY;
+  if (Math.abs(touch.clientX - touchStartX) >= 12 || Math.abs(totalY) >= 12) touchMoved = true;
 
   if (diffX >= 24) {
     performAction("right");
@@ -429,6 +435,7 @@ canvas.addEventListener("touchmove", (event) => {
 }, { passive: false });
 
 canvas.addEventListener("touchend", (event) => {
+  event.preventDefault();
   if (gameOver) {
     return;
   }
@@ -440,7 +447,7 @@ canvas.addEventListener("touchend", (event) => {
 
   const diffX = touch.clientX - touchStartX;
   const diffY = touch.clientY - touchStartY;
-  const isTap = Math.abs(diffX) < 12 && Math.abs(diffY) < 12;
+  const isTap = !touchMoved && Math.abs(diffX) < 12 && Math.abs(diffY) < 12;
   const isUpFlick = diffY <= -28 && Math.abs(diffX) < 24;
 
   if (isTap) {
@@ -448,7 +455,11 @@ canvas.addEventListener("touchend", (event) => {
   } else if (isUpFlick) {
     performAction("hard-drop");
   }
-});
+}, { passive: false });
+
+// Older iOS Safari may ignore viewport zoom restrictions. Block its native gestures.
+document.addEventListener("gesturestart", (event) => event.preventDefault(), { passive: false });
+document.addEventListener("dblclick", (event) => event.preventDefault(), { passive: false });
 
 startButton.addEventListener("click", resetGame);
 restartButton.addEventListener("click", resetGame);

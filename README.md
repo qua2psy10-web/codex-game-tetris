@@ -7,7 +7,7 @@
 このフォルダで静的サーバーを立てて開きます。
 
 ```bash
-cd "/Users/qitengyiming/Documents/New project"
+cd "/workspace/codex-game-tetris"
 python3 -m http.server 8000
 ```
 
@@ -37,7 +37,7 @@ python3 -m http.server 8000
 2. このフォルダを push
 
 ```bash
-cd "/Users/qitengyiming/Documents/New project"
+cd "/workspace/codex-game-tetris"
 git init
 git add .
 git commit -m "Add browser Tetris"
@@ -57,3 +57,7 @@ git push -u origin main
 ## iPhone
 
 iPhone の Safari で公開 URL を開き、共有メニューから「ホーム画面に追加」を選ぶとアプリ風に起動できます。
+
+## iPhone / iPad の表示
+
+盤面と操作ボタンが同じ画面に収まるレイアウトです。タップ・連続タップ・ピンチによる拡大を防止し、iPad の横向きでも操作ボタンを表示します。

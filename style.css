@@ -308,3 +308,47 @@ button {
     margin-top: 14px;
   }
 }
+
+/* Game gestures must never trigger Safari double-tap zoom or selection. */
+html, body { touch-action: manipulation; }
+button, canvas {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+button:active { filter: brightness(1.25); }
+button:focus-visible { outline: 3px solid var(--warm); outline-offset: 3px; }
+
+/* Keep the board, score and touch controls together on phones and tablets. */
+@media (max-width: 920px), (pointer: coarse) {
+  body { display: flex; flex-direction: column; justify-content: center; gap: 10px;
+    padding: max(8px, var(--safe-top)) max(12px, var(--safe-right)) max(8px, var(--safe-bottom)) max(12px, var(--safe-left)); }
+  .layout { width: min(540px, 100%); grid-template-columns: minmax(0, 1fr) 100px; gap: 10px; }
+  .hero { display: none; }
+  .board-shell { padding: 8px; border-radius: 18px; }
+  #game { width: auto; max-width: 100%; height: auto;
+    max-height: calc(100svh - 180px - var(--safe-top) - var(--safe-bottom)); aspect-ratio: 1 / 2; border-radius: 8px; }
+  .sidebar { order: initial; padding: 10px; gap: 10px; border-radius: 18px; }
+  .stat-card, .next-card { padding: 8px; border-radius: 10px; }
+  .stat-card { flex-direction: column; gap: 6px; }
+  .stat-card span, .next-card p { font-size: 12px; }
+  .stat-card strong { font-size: 24px; overflow-wrap: anywhere; }
+  #next { width: 64px; height: 64px; }
+  .primary { padding: 12px 6px; border-radius: 12px; font-size: 12px; margin-top: auto; }
+  .overlay { inset: 8px; border-radius: 12px; }
+  .overlay-label { font-size: 24px; }
+  #restartButton { padding: 12px; font-size: 14px; }
+  .touch-controls { display: grid; width: min(540px, 100%); gap: 8px; margin-top: 0; padding: 0; }
+  .touch-button, .touch-button-wide { min-height: 50px; border-radius: 14px; }
+}
+@media (max-height: 500px) and (orientation: landscape) and (pointer: coarse) {
+  body { flex-direction: row; }
+  .layout { width: min(440px, 70%); }
+  #game { max-height: calc(100svh - 36px - var(--safe-top) - var(--safe-bottom)); }
+  .sidebar { gap: 4px; padding: 6px; }
+  .stat-card { flex-direction: row; padding: 5px; }
+  .next-card { padding: 3px; gap: 0; }
+  #next { width: 44px; height: 44px; }
+  .touch-controls { width: 150px; grid-template-columns: repeat(2, 1fr); }
+}
